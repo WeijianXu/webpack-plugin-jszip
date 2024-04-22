@@ -5,7 +5,10 @@ const { RawSource } = require('webpack-sources');
 
 module.exports = class ZipPlugin {
   constructor (options) {
-    this.options = options;
+    this.options = {
+      filename: 'bundle',
+      ...options,
+    };
   }
 
   apply (compiler) {
@@ -21,7 +24,8 @@ module.exports = class ZipPlugin {
       zip.generateAsync({
         type: 'nodebuffer'
       }).then((content) => {
-        const outputPath = path.join(compilation.options.output.path, this.options.filename + '.zip');
+        const outDir = this.options.outDir || compilation.options.output.path || './';
+        const outputPath = path.join(outDir, this.options.filename + '.zip');
 
         const outputRelativePath = path.relative(compilation.options.output.path, outputPath);
         compilation.assets[outputRelativePath] = new RawSource(content);
