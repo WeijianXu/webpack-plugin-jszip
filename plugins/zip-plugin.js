@@ -13,7 +13,8 @@ module.exports = class ZipPlugin {
 
   apply (compiler) {
     compiler.hooks.emit.tapAsync('ZipPlugin', (compilation, callback) => {
-      const folder = zip.folder(this.options.filename);
+      const folderName = this.options.dir || compilation.options.output.path || this.options.filename;
+      const folder = zip.folder(folderName);
 
       for (let filename in compilation.assets) {
         const source = compilation.assets[filename].source();
