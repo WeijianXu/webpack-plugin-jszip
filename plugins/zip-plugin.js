@@ -13,7 +13,7 @@ module.exports = class ZipPlugin {
 
   apply (compiler) {
     compiler.hooks.emit.tapAsync('ZipPlugin', (compilation, callback) => {
-      const folderName = this.options.dir || compilation.options.output.path || this.options.filename;
+      const folderName = this.options.dir || compilation.options.output.path;
       const folder = zip.folder(folderName);
 
       for (let filename in compilation.assets) {
@@ -25,7 +25,7 @@ module.exports = class ZipPlugin {
       zip.generateAsync({
         type: 'nodebuffer'
       }).then((content) => {
-        const outDir = this.options.outDir || compilation.options.output.path || './';
+        const outDir = this.options.outDir || compilation.options.output.path;
         const outputPath = path.join(outDir, this.options.filename + '.zip');
 
         const outputRelativePath = path.relative(compilation.options.output.path, outputPath);
