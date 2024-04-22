@@ -1,15 +1,17 @@
 {
   "name": "webpack-plugin-jszip",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple zip plugin of webpack for compressing all the bundle files into a single zip file.",
   "main": "./plugins/zip-plugin.js",
   "scripts": {
     "test": "node ./test",
     "build": "webpack --config webpack.config.js"
   },
-  "keywords": ["webpack",
-  "plugin",
-  "zip"],
+  "keywords": [
+    "webpack",
+    "plugin",
+    "zip"
+  ],
   "author": "Weijian Xu",
   "license": "ISC",
   "dependencies": {
