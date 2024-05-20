@@ -22,8 +22,12 @@ module.exports = class ZipPlugin {
         folder.file(filename, source);
       }
 
-      zip.generateAsync({
-        type: 'nodebuffer'
+      folder.generateAsync({
+        type: 'nodebuffer',
+        compression: "DEFLATE",
+        compressionOptions: {
+            level: 9
+        }
       }).then((content) => {
         const outDir = this.options.outDir || compilation.options.output.path;
         const outputPath = path.join(outDir, this.options.filename + '.zip');
